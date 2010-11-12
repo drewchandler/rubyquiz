@@ -1,0 +1,1 @@
+require 'solitaire_cipher'
