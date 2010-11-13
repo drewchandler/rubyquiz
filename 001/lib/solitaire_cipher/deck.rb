@@ -11,7 +11,7 @@ module SolitaireCipher
       move_card(54, 2)
 
       joker_indices = find_jokers
-      triple_cut(@cards[joker_indices[0]], @cards[joker_indices[1]])
+      triple_cut(joker_indices[0], joker_indices[1])
 
       count_cut(@cards[53])
 
@@ -29,24 +29,16 @@ module SolitaireCipher
       @cards.insert(destination, card)
     end
 
-    def triple_cut(top_card, bottom_card)
-      top_index = @cards.index(top_card)
-      bottom_index = @cards.index(bottom_card)
-
-      @cards = @cards[(bottom_index + 1)..54] + @cards[top_index..bottom_index] + @cards[0..(top_index - 1)]
+    def triple_cut(top_index, bottom_index)
+      @cards = @cards[bottom_index + 1..54] + @cards[top_index..bottom_index] + @cards[0..top_index - 1]
     end
 
     def find_jokers
-      results = []
-      @cards.each_index do |i|
-        if @cards[i] == 53 || @cards[i] == 54
-          results << i
+      top_joker = @cards.index(53)
+      bottom_joker = @cards.index(54)
+      top_joker, bottom_joker = bottom_joker, top_joker if top_joker > bottom_joker
 
-          break if results.size == 2
-        end
-      end
-
-      results
+      [top_joker, bottom_joker]
     end
 
     def count_cut(n)
@@ -60,7 +52,7 @@ module SolitaireCipher
         nil
       else
         key_card -= 26 if key_card > 26
-        (key_card + 64).chr
+        key_card
       end
     end
   end

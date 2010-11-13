@@ -14,7 +14,7 @@ describe SolitaireCipher::Deck do
     end
 
     it 'should return the letter value of the card that is the top cards number value down from the top' do
-      subject.generate_key.should == 'D'
+      subject.generate_key.should == 4
     end
   end
 
@@ -33,7 +33,7 @@ describe SolitaireCipher::Deck do
   end
 
   describe '#triple_cut' do
-    before(:each) { subject.triple_cut(20, 40) }
+    before(:each) { subject.triple_cut(19, 39) }
 
     it 'should move all cards above the top card beneath the bottom card' do
       subject.cards.slice(35, 19).should == (1..19).to_a
@@ -64,13 +64,13 @@ describe SolitaireCipher::Deck do
 
   describe '#output_key' do
     it 'should return the letter value of the card that is the top cards number value down from the top' do
-      subject.output_key.should == 'B'
+      subject.output_key.should == 2
     end
 
     it 'should treat joker B as a 53 when counting' do
       subject.cards = [54] + (2..53).to_a << 1
 
-      subject.output_key.should == 'A'
+      subject.output_key.should == 1
     end
 
     it 'should return nil when the value card is a joker' do

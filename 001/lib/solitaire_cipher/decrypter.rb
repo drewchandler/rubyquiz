@@ -7,7 +7,7 @@ module SolitaireCipher
       while keystream.length < keystream_length
         next unless key = deck.generate_key
 
-        keystream << key.ord - 64
+        keystream << key
       end
 
       decrypted_string = string.each_char.map do |char|
