@@ -6,6 +6,17 @@ module SolitaireCipher
       @cards = (1..54).to_a
     end
 
+    def generate_keystream(length)
+      keystream = []
+      while keystream.length < length
+        next unless key = generate_key
+
+        keystream << key
+      end
+
+      keystream
+    end
+
     def generate_key
       move_card(53, 1)
       move_card(54, 2)

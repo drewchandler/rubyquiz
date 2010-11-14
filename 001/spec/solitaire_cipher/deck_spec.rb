@@ -18,6 +18,12 @@ describe SolitaireCipher::Deck do
     end
   end
 
+  describe '#generate_keystream' do
+    it 'should generate a keystream of the given length' do
+      subject.generate_keystream(5).should == [4, 23, 10, 24, 8]
+    end
+  end
+
   describe '#move_card' do
     it 'should move the card down the given number of spots' do
       subject.move_card(1,1)

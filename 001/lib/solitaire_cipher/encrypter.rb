@@ -4,13 +4,7 @@ module SolitaireCipher
       string.upcase!.gsub!(/[^A-Z]/, '')
       string += 'X' * (5 - (string.length % 5)) if (string.length % 5) != 0
 
-      keystream = []
-      keystream_length = string.length
-      while keystream.length < keystream_length
-        next unless key = deck.generate_key
-
-        keystream << key.ord - 64
-      end
+      keystream = deck.generate_keystream(string.length)
 
       encrypted_string = string.each_char.map do |char|
         if char == ' '
