@@ -42,7 +42,7 @@ module SolitaireCipher
     end
 
     def count_cut(n)
-      @cards = @cards[(n..52)] + @cards[(0..(n - 1))] << @cards[53]
+      @cards = @cards[n..52] + @cards[0..n - 1] << @cards[53]
     end
 
     def output_key
