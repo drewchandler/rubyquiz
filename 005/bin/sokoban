@@ -1,0 +1,33 @@
+#!/bin/env ruby
+
+require 'sokoban'
+require 'curses'
+
+include Sokoban
+include Curses
+
+if ARGV.length != 1
+  STDERR.puts "Usage: sokoban <level-file>"
+  exit
+end
+
+level = Level.new(File.open(ARGV[0]))
+
+clear
+addstr level.to_s
+
+while !level.completed?
+  command = getch
+  case command
+    when UP, DOWN, LEFT, RIGHT then level.move_man(command)
+    when 'q' then exit
+  end
+
+  clear
+  addstr level.to_s
+end
+
+addstr "You win!\n<Press any key to exit>"
+getch
+
+# vim: syntax=ruby
