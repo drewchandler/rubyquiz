@@ -1,0 +1,4 @@
+require 'gedcom'
+
+puts Gedcom::Parser.parse(File.open(ARGV[0]))
+# vim: syntax=ruby
